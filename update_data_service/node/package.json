@@ -1,11 +1,10 @@
 {
   "name": "update_data_service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "type": "module",
   "scripts": {
     "start": "npx nodemon start server.js",
-    "run": "python3 main.py",
     "up": "sudo docker compose -f infra/compose.yaml up -d --remove-orphans",
     "down": "sudo docker compose -f infra/compose.yaml down"
   },
@@ -15,6 +14,7 @@
   "description": "",
   "dependencies": {
     "cheerio": "^1.0.0",
+    "dotenv": "^16.4.5",
     "express": "^4.21.0"
   }
 }

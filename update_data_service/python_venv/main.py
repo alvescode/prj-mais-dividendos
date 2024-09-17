@@ -2,8 +2,9 @@ import pandas as pd
 import asyncio
 import httpx
 import json
-
+import os
 from functions import trata_response3,trata_response1,trata_response2,trata_response4,trata_response5,trata_response6
+node_port = os.getenv('node_port')
 
 async def fetch(url,timeout=500):
     async with httpx.AsyncClient() as client:
@@ -11,7 +12,7 @@ async def fetch(url,timeout=500):
         return response.text
     
 async def get_data(stock):
-    url = f'http://node-service:3010/data?acao={stock}'
+    url = f'http://node-service:{node_port}/data?acao={stock}'
     print(url)
     result = await fetch(url)
     return result
@@ -19,7 +20,7 @@ async def get_data(stock):
 tickers = pd.read_csv('tickers-b3.csv')["Ticker"].to_list()
 
 def main():
-    for t in tickers[149:]:
+    for t in tickers:
         main_result = asyncio.run(get_data(t))
         data = json.loads(main_result)
         print(f'Dados Recebidos para {t}.')

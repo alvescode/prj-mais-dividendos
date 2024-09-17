@@ -1,6 +1,8 @@
 import { main } from "./functions.js";
 import express from "express";
-const PORT = 3010;
+import "dotenv/config";
+
+const { PORT } = process.env;
 const server = express();
 server.use(express.json());
 

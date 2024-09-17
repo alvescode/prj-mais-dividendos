@@ -1,15 +1,17 @@
 import pandas as pd
 from sqlalchemy import create_engine
 # from sqlalchemy.orm import sessionmaker
+from dotenv import load_dotenv
+import os
+load_dotenv()
 
+postgres_user = os.getenv('postgres_user')
+postgres_password =os.getenv('postgres_password')
+postgres_host =os.getenv('postgres_host')
+postgres_database =os.getenv('postgres_database')
+postgres_port=os.getenv('postgres_port')
 
-user = 'local_user'        
-password = 'local_password'      
-host = 'postgres'          
-database = 'local_db'  
-port=5432
-
-connection_string = f'postgresql+psycopg://{user}:{password}@{host}:{port}/{database}'   
+connection_string = f'postgresql+psycopg://{postgres_user}:{postgres_password}@{postgres_host}:{postgres_port}/{postgres_database}'   
 
 engine = create_engine(connection_string)
 # Session = sessionmaker(bind=engine)
