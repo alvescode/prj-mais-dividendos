@@ -1,0 +1,22 @@
+docker compose up --build
+
+docker compose down
+
+docker compose up --build --force-recreate
+
+sudo chown -R +755 ./data
+
+sudo chown -R 5050:5050 ./data/pgadmin
+
+sudo chmod -R 755 ./data/pgadmin
+
+permitir tambem para gravar erros no diretorio de /logs
+
+
+#!/bin/bash
+
+docker compose up -d
+
+docker compose logs -f python-service
+
+docker compose down
