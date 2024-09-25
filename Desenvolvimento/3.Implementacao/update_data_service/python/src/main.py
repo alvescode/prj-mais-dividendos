@@ -3,7 +3,7 @@ import asyncio
 import httpx
 import json
 import os
-from functions import trata_response3,trata_response1,trata_response2,trata_response4,trata_response5,trata_response6
+from functions import trata_dados_financeiros,trata_dados_do_ticker,trata_preco_da_acao,trata_dados_indicadores,trata_dados_dividendos,trata_dados_dividend_yeld
 node_port = os.getenv('node_port')
 
 async def fetch(url,timeout=500):
@@ -24,13 +24,12 @@ def main():
         main_result = asyncio.run(get_data(t))
         data = json.loads(main_result)
         print(f'Dados Recebidos para {t}.')
-    
-        trata_response1(data['response1'])
-        trata_response2(data["response1"],data["response2"])
-        trata_response3(data["response1"],data["response3"])
-        trata_response4(data["response1"],data["response4"])
-        trata_response5(data["response1"],data["response5"])
-        trata_response6(data["response1"],data["response6"])
+        trata_dados_do_ticker(data["dados_do_ticker"])
+        trata_preco_da_acao(data["dados_do_ticker"]["vticker"],data["dados_preco_da_acao"])
+        trata_dados_financeiros(data["dados_do_ticker"]["vticker"],data["dados_financeiros"])
+        trata_dados_indicadores(data["dados_do_ticker"],data["dados_indicadores"])
+        trata_dados_dividendos(data["dados_do_ticker"]["vticker"],data["dados_dividendos"])
+        trata_dados_dividend_yeld(data["dados_do_ticker"]["vticker"],data["dados_dividend_yeld"])
     
     print('Tarefa Terminou.')
     while True:

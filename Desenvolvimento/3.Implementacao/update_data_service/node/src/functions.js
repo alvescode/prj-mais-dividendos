@@ -20,7 +20,7 @@ function writeContentWithNewLines(content, filePath) {
   });
 }
 
-async function requisicao1(ticker_param) {
+async function busca_dados_do_ticker(ticker_param) {
   try {
     const response = await fetch(`${baseUrl}/acoes/${ticker_param}`);
     const html = await response.text();
@@ -34,13 +34,13 @@ async function requisicao1(ticker_param) {
     const companyShareholdingDatatable = $("#table-company-base-shareholding");
     const companyId = companyShareholdingDatatable.attr("data-company-id");
     const { ticker, type, id } = info[0];
-    const f_response = {
+    const dados_do_ticker = {
       vticker: ticker,
       vtype: type,
       vid: id,
       vcompanyId: companyId,
     };
-    return f_response;
+    return dados_do_ticker;
   } catch (e) {
     const erro = {
       error: e.name,
@@ -53,17 +53,17 @@ async function requisicao1(ticker_param) {
   }
 }
 
-async function requisicao2(id) {
+async function busca_preco_da_acao(id) {
   try {
-    const response2 = await fetch(`${baseUrl}/api/cotacao/ticker/${id}`);
-    if (!response2.ok) {
+    const preco_da_acao = await fetch(`${baseUrl}/api/cotacao/ticker/${id}`);
+    if (!preco_da_acao.ok) {
       throw new Error(
-        `Erro HTTP: ${response2.status} - ${response2.statusText}`
+        `Erro HTTP: ${preco_da_acao.status} - ${preco_da_acao.statusText}`
       );
     }
-    const data = await response2.json();
+    const preço_da_ação_response = await preco_da_acao.json();
 
-    return data;
+    return preço_da_ação_response;
   } catch (e) {
     const content = {
       error: e.name,
@@ -76,13 +76,13 @@ async function requisicao2(id) {
   }
 }
 
-async function requisicao3(companyId) {
+async function busca_dados_financeiros(companyId) {
   try {
     const response = await fetch(
       `${baseUrl}/api/balancos/balancoresultados/chart/${companyId}/${anos_anteriores}/${period}`
     );
-    const json = await response.json();
-    return json;
+    const dados_financeiros = await response.json();
+    return dados_financeiros;
   } catch (e) {
     writeContentWithNewLines(JSON.stringify(e), "logError.txt");
     return {
@@ -94,12 +94,12 @@ async function requisicao3(companyId) {
   }
 }
 
-async function requisicao4(id) {
+async function busca_dados_indicadores(id) {
   try {
     const url = `${baseUrl}api/historico-indicadores/${id}/10`;
     const response = await fetch(url);
-    const json = await response.json();
-    return json;
+    const dados_de_indicadores = await response.json();
+    return dados_de_indicadores;
   } catch (e) {
     writeContentWithNewLines(JSON.stringify(e), "logError.txt");
     return {
@@ -111,12 +111,12 @@ async function requisicao4(id) {
   }
 }
 
-async function requisicao5(ticker) {
+async function busca_dados_dividendos(ticker) {
   try {
     const url5 = `${baseUrl}api/dividendos/chart/${ticker}/${periodo_dividendos}/ano/`;
-    const response5 = await fetch(url5);
-    const response5_json = await response5.json();
-    return response5_json;
+    const dados_dividendos = await fetch(url5);
+    const dados_dividendos_json = await dados_dividendos.json();
+    return dados_dividendos_json;
   } catch (e) {
     writeContentWithNewLines(JSON.stringify(e), "logError.txt");
 
@@ -129,12 +129,12 @@ async function requisicao5(ticker) {
   }
 }
 
-async function requisicao6(ticker) {
+async function busca_dados_dividend_yeld(ticker) {
   try {
     const url6 = `${baseUrl}api/dividend-yield/chart/${ticker}/${periodo_dividendos}/ano/`;
-    const response6 = await fetch(url6);
-    const response6_json = await response6.json();
-    return response6_json;
+    const dados_dividend_yeld = await fetch(url6);
+    const dados_dividend_yeld_json = await dados_dividend_yeld.json();
+    return dados_dividend_yeld_json;
   } catch (e) {
     writeContentWithNewLines(JSON.stringify(e), "logError.txt");
 
@@ -148,24 +148,29 @@ async function requisicao6(ticker) {
 }
 export async function main(ticker_param) {
   try {
-    const response1 = await requisicao1(ticker_param);
-    const { vid, vcompanyId, vticker } = response1;
-    const [response2, response3, response4, response5, response6] =
-      await Promise.all([
-        requisicao2(vid),
-        requisicao3(vcompanyId),
-        requisicao4(vid),
-        requisicao5(vticker),
-        requisicao6(vticker),
-      ]);
+    const dados_do_ticker = await busca_dados_do_ticker(ticker_param);
+    const { vid, vcompanyId, vticker } = dados_do_ticker;
+    const [
+      dados_preco_da_acao,
+      dados_financeiros,
+      dados_indicadores,
+      dados_dividendos,
+      dados_dividend_yeld,
+    ] = await Promise.all([
+      busca_preco_da_acao(vid),
+      busca_dados_financeiros(vcompanyId),
+      busca_dados_indicadores(vid),
+      busca_dados_dividendos(vticker),
+      busca_dados_dividend_yeld(vticker),
+    ]);
 
     const response = {
-      response1,
-      response2,
-      response3,
-      response4,
-      response5,
-      response6,
+      dados_do_ticker,
+      dados_preco_da_acao,
+      dados_financeiros,
+      dados_indicadores,
+      dados_dividendos,
+      dados_dividend_yeld,
     };
     return response;
   } catch (err) {
