@@ -1,7 +1,7 @@
 {
   "name": "update_data_service",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "src/server.js",
   "type": "module",
   "scripts": {
     "start": "npx nodemon start server.js",
