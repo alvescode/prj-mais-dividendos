@@ -1,0 +1,15 @@
+.header{
+    transition: all 0.5;
+    z-index: 997;
+    height: 60px;
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 20px 30px;
+    background-color: #14293b;
+    padding-left: 20px;
+}
+
+.header .toggle-sidebar-btn {
+    font-size: 32px;
+    padding-left: 10px;
+    cursor: pointer;
+    color: #14293b;
+}
