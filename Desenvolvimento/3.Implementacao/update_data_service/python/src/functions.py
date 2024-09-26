@@ -16,7 +16,7 @@ connection_string = f'postgresql+psycopg://{postgres_user}:{postgres_password}@{
 engine = create_engine(connection_string)
 # Session = sessionmaker(bind=engine)
 
-def envia_banco(df, table, write):
+def envia_df_para_banco(df, table, write):
     try:
         if write == 'r':
             df.to_sql(table, con=engine, if_exists='replace', index=False)
@@ -25,16 +25,16 @@ def envia_banco(df, table, write):
     except Exception as e:
         print(f"Erro ao enviar dados para o banco: {e}")
 
-def trata_response1(response1):
+def trata_dados_do_ticker(response1):
     response1 = pd.DataFrame([response1])
-    envia_banco(response1,'virtual','a')
+    envia_df_para_banco(response1,'virtual','a')
 
-def trata_response2(response1,response2):
+def trata_preco_da_acao(vticker,response2):
     response2 = pd.DataFrame([response2])
-    response2["ticker"] = response1["vticker"]
-    envia_banco(response2,'prices','a')
+    response2["ticker"] = vticker 
+    envia_df_para_banco(response2,'prices','a')
 
-def trata_response3(response1,response3):
+def trata_dados_financeiros(vticker,response3):
     cabecalho = response3[0]
     cabecalho[1] = 'Últ. 12M'
     sufixv = 1
@@ -47,12 +47,12 @@ def trata_response3(response1,response3):
             cabecalho[index]= f'AH_{sufixh} %'
             sufixh += 1
     response3 = pd.DataFrame(response3[1:],columns=cabecalho)
-    response3["ticker"] = response1["vticker"]
+    response3["ticker"] = vticker
     if '2019' in response3.columns:
         response3.drop(columns=['2019'],inplace=True)
-    envia_banco(response3,'dados_financeiros','a')
+    envia_df_para_banco(response3,'dados_financeiros','a')
 
-def trata_response4(response1,response4):
+def trata_dados_indicadores(response1,response4):
 
     for key in response4.keys():
         for year in response4[key]:
@@ -66,24 +66,21 @@ def trata_response4(response1,response4):
         key_df = pd.DataFrame(response4[key])
         key_df['ticker'] = response1['vticker']
 
-
-
-
         if 'company_id' not in key_df.keys():    
             key_df['company_id'] = float(response1['vcompanyId'])
         if 'ticker_id' not in key_df.keys():
             key_df['ticker_id'] = float(response1['vid'])
 
-        envia_banco(key_df,'indicadores','a')
+        envia_df_para_banco(key_df,'indicadores','a')
             
-def trata_response5(response1,response5):
+def trata_dados_dividendos(vticker,response5):
     df = pd.DataFrame(response5)
-    df["Ticker"] = response1["vticker"]
-    envia_banco(df,'dividendos','a')
+    df["Ticker"] = vticker
+    envia_df_para_banco(df,'dividendos','a')
     return response5
 
-def trata_response6(response1,response6):
+def trata_dados_dividend_yeld(vticker,response6):
     df = pd.DataFrame(response6)
-    df["Ticker"] = response1["vticker"]
-    envia_banco(df,'dividend_y','a')
+    df["Ticker"] = vticker
+    envia_df_para_banco(df,'dividend_y','a')
     return response6
