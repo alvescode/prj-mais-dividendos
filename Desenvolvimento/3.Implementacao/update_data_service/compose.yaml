@@ -14,7 +14,7 @@ services:
 
   python-service:
     build:
-      context: ./python_venv
+      context: ./python
       dockerfile: Dockerfile
     networks:
       - container-network
