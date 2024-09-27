@@ -1,6 +1,6 @@
 .header .search-bar {
-    width: 132px;
-    height: 22px;
+    width: 230px;
+    height: 25px;
     flex-shrink: 1;
 }
 
@@ -31,11 +31,11 @@
 .search-form button {
     background: none;
     border: none;
-    padding: 0 10px;
+    padding: 0 5px;
 }
 
 .search-form button i {
-    color: #e9edf18A;
+    color: var(--third);
     
 }
 
