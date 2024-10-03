@@ -1,8 +1,3 @@
-#subir o pgadmin e a stock api simulando o ambiente real do projeto
-#criar redes para as comunicações
-#Criar Dockerfile para este projeto java e passar o docker compose para a raiz da implementacao, excluir essa funcionalidade do compose com o spring
-#como rodar o spring em um container? roda numa imagem do openjdk?
-
 services:
   node-service:
     build:
