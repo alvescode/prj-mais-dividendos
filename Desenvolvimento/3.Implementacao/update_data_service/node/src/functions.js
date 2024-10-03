@@ -1,6 +1,7 @@
 import { load } from "cheerio";
 import { error } from "console";
 import fs from "fs";
+import { url } from "inspector";
 
 const baseUrl = "https://investidor10.com.br/";
 
@@ -21,16 +22,41 @@ function writeContentWithNewLines(content, filePath) {
 }
 
 async function busca_dados_do_ticker(ticker_param) {
+  console.log(ticker_param);
+  let info;
+  const url = `${baseUrl}/acoes/${ticker_param}`;
+  console.log(url);
   try {
-    const response = await fetch(`${baseUrl}/acoes/${ticker_param}`);
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`Falha na requisição. Status: ${response.status}`);
+    }
+    // Alterações principais:
+    // Verificação do status HTTP: Garante que a resposta da requisição foi bem-sucedida antes de tentar processá-la.
+    // Checagem da existência do script e do datatable: Previne tentativas de acesso a elementos inexistentes no DOM.
+    // Tratamento do JSON.parse: Adiciona um bloco try-catch separado para capturar erros ao processar o JSON.
+    // Log de erros detalhado: O objeto erro contém mais informações sobre o que pode ter dado errado.
+
     const html = await response.text();
     const $ = load(html);
     const node = 30;
     const script = $("script")[node];
-    const info = await JSON.parse(
+
+    if (!script || !script.children || !script.children[0]) {
+      throw { message: `Script node ${node} não encontrado ou sem conteúdo.` };
+    }
+    const rawData = script.children[0].data
+      .slice(31)
+      .replace(/'/g, '"')
+      .replace(";", "");
+    console.log(script.children[0].data);
+
+    info = await JSON.parse(
       script.children[0].data.slice(31).replace(/'/g, '"').replace(";", "")
     );
-    console.log("INFO", info, info[0]);
+
+    // console.log("INFO", info, info[0]); //temporary
     const companyShareholdingDatatable = $("#table-company-base-shareholding");
     const companyId = companyShareholdingDatatable.attr("data-company-id");
     const { ticker, type, id } = info[0];
@@ -48,8 +74,9 @@ async function busca_dados_do_ticker(ticker_param) {
       message: "Erro na Etapa 1",
       errorMessage: e.message,
     };
+    //criar uma pasta node/ dentro de data/
     writeContentWithNewLines(JSON.stringify(erro), "./logError.txt");
-    throw error;
+    throw e;
   }
 }
 
@@ -72,7 +99,7 @@ async function busca_preco_da_acao(id) {
       errorMessage: e.message,
     };
     writeContentWithNewLines(JSON.stringify(content), "logError.txt");
-    throw new Error(`Erro ${e.name}`);
+    throw content;
   }
 }
 
@@ -174,6 +201,6 @@ export async function main(ticker_param) {
     };
     return response;
   } catch (err) {
-    console.log("Erro: ", err);
+    console.log("Erro: ", err.message);
   }
 }

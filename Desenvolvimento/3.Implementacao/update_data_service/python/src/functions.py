@@ -32,6 +32,7 @@ def trata_dados_do_ticker(response1):
 def trata_preco_da_acao(vticker,response2):
     response2 = pd.DataFrame([response2])
     response2["ticker"] = vticker 
+    print(response2)
     envia_df_para_banco(response2,'prices','a')
 
 def trata_dados_financeiros(vticker,response3):
@@ -56,11 +57,9 @@ def trata_dados_indicadores(response1,response4):
 
     for key in response4.keys():
         for year in response4[key]:
-            if(year["value"]==None):
+            if(year["value"]==None) or (year["value"]=='-') :
                 year["value"] = float(0)
-            elif(year["value"]=='-'):
-                year["value"] = float(0)
-            if isinstance(year['value'], str) and ',' in year['value']:#elif
+            if isinstance(year['value'], str) and ',' in year['value']:
                 year['value'] = float(year['value'].replace(",", "."))
             
         key_df = pd.DataFrame(response4[key])
