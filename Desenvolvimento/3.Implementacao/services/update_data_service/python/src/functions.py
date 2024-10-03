@@ -27,12 +27,13 @@ def envia_df_para_banco(df, table, write):
 
 def trata_dados_do_ticker(response1):
     response1 = pd.DataFrame([response1])
-    envia_df_para_banco(response1,'virtual','a')
+    envia_df_para_banco(response1,'virtual','r')
 
 def trata_preco_da_acao(vticker,response2):
     response2 = pd.DataFrame([response2])
     response2["ticker"] = vticker 
-    envia_df_para_banco(response2,'prices','a')
+    print(response2)
+    envia_df_para_banco(response2,'prices','r')
 
 def trata_dados_financeiros(vticker,response3):
     cabecalho = response3[0]
@@ -50,17 +51,15 @@ def trata_dados_financeiros(vticker,response3):
     response3["ticker"] = vticker
     if '2019' in response3.columns:
         response3.drop(columns=['2019'],inplace=True)
-    envia_df_para_banco(response3,'dados_financeiros','a')
+    envia_df_para_banco(response3,'dados_financeiros','r')
 
 def trata_dados_indicadores(response1,response4):
 
     for key in response4.keys():
         for year in response4[key]:
-            if(year["value"]==None):
+            if(year["value"]==None) or (year["value"]=='-') :
                 year["value"] = float(0)
-            elif(year["value"]=='-'):
-                year["value"] = float(0)
-            if isinstance(year['value'], str) and ',' in year['value']:#elif
+            if isinstance(year['value'], str) and ',' in year['value']:
                 year['value'] = float(year['value'].replace(",", "."))
             
         key_df = pd.DataFrame(response4[key])
@@ -71,16 +70,16 @@ def trata_dados_indicadores(response1,response4):
         if 'ticker_id' not in key_df.keys():
             key_df['ticker_id'] = float(response1['vid'])
 
-        envia_df_para_banco(key_df,'indicadores','a')
+        envia_df_para_banco(key_df,'indicadores','r')
             
 def trata_dados_dividendos(vticker,response5):
     df = pd.DataFrame(response5)
     df["Ticker"] = vticker
-    envia_df_para_banco(df,'dividendos','a')
+    envia_df_para_banco(df,'dividendos','r')
     return response5
 
 def trata_dados_dividend_yeld(vticker,response6):
     df = pd.DataFrame(response6)
     df["Ticker"] = vticker
-    envia_df_para_banco(df,'dividend_y','a')
+    envia_df_para_banco(df,'dividend_y','r')
     return response6
