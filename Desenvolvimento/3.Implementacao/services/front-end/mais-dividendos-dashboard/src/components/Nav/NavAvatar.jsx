@@ -5,7 +5,8 @@ import profileImg from '../../images/homem.png';
 function NavAvatar() {
   return (
     <li className='nav-item dropdown pe-3'>
-      <a
+      <a href='#'
+
         className='nav-link nav-profile d-flex align-items-center pe-0'
         data-bs-toggle='dropdown'
       >
@@ -25,7 +26,8 @@ function NavAvatar() {
         </li>
         
         <li>
-          <a className='dropdown-item d-flex'>
+          <a href='#' className='dropdown-item d-flex'>
+
             <i className='bi bi-person'></i>
             <span>Meu Perfil</span>
           </a>
@@ -35,7 +37,7 @@ function NavAvatar() {
           <hr className='dropdown-divider'/>
         </li>
         <li>
-          <a className='dropdown-item d-flex align-items-center'>
+          <a href='#' className='dropdown-item d-flex align-items-center'>
             <i className='bi bi-gear'></i>
             <span>Configurações</span>
           </a>

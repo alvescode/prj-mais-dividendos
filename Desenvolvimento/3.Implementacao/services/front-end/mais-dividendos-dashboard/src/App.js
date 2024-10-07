@@ -7,9 +7,16 @@ import 'bootstrap/dist/js/bootstrap.min.js';
 
 import './App.css';
 import Header from './components/Header/Header';
+import SideBar from './components/SideBar/SideBar';
+import Main from './components/Main/Main';
+
 
 function App() {
-  return <Header/>;
+  return (<>
+  <Header/>
+  <SideBar/>
+  <Main/>
+  </>);
 }
 
 export default App;
