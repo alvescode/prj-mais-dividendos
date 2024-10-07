@@ -27,13 +27,14 @@ def envia_df_para_banco(df, table, write):
 
 def trata_dados_do_ticker(response1):
     response1 = pd.DataFrame([response1])
+    print(response1)
     envia_df_para_banco(response1,'virtual','r')
 
 def trata_preco_da_acao(vticker,response2):
     response2 = pd.DataFrame([response2])
     response2["ticker"] = vticker 
     print(response2)
-    envia_df_para_banco(response2,'prices','r')
+    envia_df_para_banco(response2,'prices','a')
 
 def trata_dados_financeiros(vticker,response3):
     cabecalho = response3[0]
