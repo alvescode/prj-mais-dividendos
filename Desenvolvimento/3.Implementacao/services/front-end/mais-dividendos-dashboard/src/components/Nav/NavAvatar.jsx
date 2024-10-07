@@ -6,6 +6,7 @@ function NavAvatar() {
   return (
     <li className='nav-item dropdown pe-3'>
       <a href='#'
+
         className='nav-link nav-profile d-flex align-items-center pe-0'
         data-bs-toggle='dropdown'
       >
@@ -26,6 +27,7 @@ function NavAvatar() {
         
         <li>
           <a href='#' className='dropdown-item d-flex'>
+
             <i className='bi bi-person'></i>
             <span>Meu Perfil</span>
           </a>
