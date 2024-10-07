@@ -24,6 +24,7 @@ def main():
         main_result = asyncio.run(get_data(t))
         data = json.loads(main_result)
         print(f'Dados Recebidos para {t}.')
+        print(data["dados_do_ticker"])
         trata_dados_do_ticker(data["dados_do_ticker"])
         trata_preco_da_acao(data["dados_do_ticker"]["vticker"],data["dados_preco_da_acao"])
         trata_dados_financeiros(data["dados_do_ticker"]["vticker"],data["dados_financeiros"])
