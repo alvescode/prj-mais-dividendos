@@ -21,7 +21,7 @@ Atualmente, a API oferece o seguinte endpoint:
 
 - **Frontend**: Acesse a interface de usuário em [http://localhost:3000](http://localhost:3000) ( Não é iniciada automaticamente AINDA)
   - Acesse a pasta services/front-end/mais-dividendos-dashboard e digite (em um novo terminal) `npm run install && npm run build && npm run start` 
-- **Stock API**: Acesse o endpoint da API em [http://localhost:8080/api/stock/{ticker}](http://localhost:8080/api/stock/{ticker})
+- **Stock API**: Acesse o endpoint da API em [http://localhost:8080/api/stock/{ticker}](http://localhost:8080/api/stock/{ticker}) (iniciado automaticamente com a execução do script a seguir)
     -  você pode usar como exemplo: http://localhost:8080/api/stock/LREN3 ou http://localhost:8080/api/stock/PETR4
 
 ## Requisitos
