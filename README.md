@@ -9,6 +9,7 @@ O projeto segue uma abordagem de microsserviços, onde:
 - **update_data_service**: Expondo um endpoint para buscar o preço de ações com base no ticker fornecido, após realizar web scraping online.
 - **frontend_service**: Responsável pela interface gráfica, exibindo os dados das ações e permitindo a interação do usuário.
 - **stock-api-service**: Responsável pelo fornecimento de dados das ações mais atualizados provenientes de um banco de dados Postgres levantado no arquivo infra/compose.yml.
+- **authentication_authorization_service**: EM CONSTRUÇÃO
 
 ### Endpoints Disponíveis
 
