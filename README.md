@@ -47,4 +47,4 @@ Esse script irá configurar todos os microsserviços, incluindo o backend que fa
 
 - O projeto está preparado para ser executado em um ambiente Docker.
 - Certifique-se de que as portas **3000** (frontend) e **8080** (API backend) estejam disponíveis.
-- O web scraping é feito em tempo real para garantir que o preço exibido seja o mais atualizado possível.
+- O web scraping é feito em tempo real para garantir que o preço exibido seja o mais atualizado possível, entretanto, os dados são persistidos na pasta infra/data/postgres/ criada e mantida como um volume pelo docker, possibilitando que o script de atualização seja executado apenas uma vez.
