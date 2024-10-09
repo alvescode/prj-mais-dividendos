@@ -73,6 +73,15 @@ services:
     networks:
       - container-network
 
+  frontend-service:
+    build:
+      context: ../services/front-end
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - container-network
+
 networks:
   container-network:
     driver: bridge
