@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,6 +30,7 @@ public class StockController {
     }// nao pode retornar dois resultados, nem ter no banco
      // fazer tratamento de erros nos endpoints
 
+    @CrossOrigin(origins = "http://localhost:3000")
     @GetMapping("/prices")
     public ResponseEntity<Map<String, List<StockPrice>>> getPrices() {
         List<StockPrice> serviceResponse = stockService.getPrices();
