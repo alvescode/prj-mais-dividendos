@@ -5,7 +5,8 @@ Mais Dividendos é uma aplicação de gerenciamento de carteiras de investimento
 ## Arquitetura
 
 O projeto segue uma abordagem de microsserviços, onde:
-- **postgres**: Container Postgres que persiste os dados na pasta infra/data . 
+- **postgres**: Container Postgres que persiste os dados na pasta infra/data .
+- **pgadmin**: Interface gráfica para administração de bancos de dados Postgres. Com o pgAdmin, é possível gerenciar e monitorar o banco de dados Postgres, executar consultas SQL e visualizar tabelas e esquemas de maneira simplificada.
 - **update_data_service**: Realiza web-scraping online para buscar dados atualizados diariamente do mercado brasileiro de ações. Persiste os dados encontrados no banco de dados Postgres.
 - **frontend_service**: Responsável pela interface gráfica, exibindo os dados das ações e permitindo a interação do usuário.
 - **stock-api-service**: Responsável pelo fornecimento de dados das ações provenientes do microsserviço Postgres.
@@ -22,6 +23,7 @@ Atualmente, a API oferece o seguinte endpoint:
 - **Frontend**: Acesse a interface de usuário em [http://localhost:3000](http://localhost:3000)
 - **Stock API**: Acesse o endpoint da API em [http://localhost:8080/api/stock/{ticker}](http://localhost:8080/api/stock/{ticker}) 
     -  você pode usar como exemplo: http://localhost:8080/api/stock/LREN3 ou http://localhost:8080/api/stock/PETR4
+- **PGAdmin**: Acessível via navegador na URL http://localhost:5050.
 
 ## Requisitos
 
