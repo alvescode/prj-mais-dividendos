@@ -24,7 +24,7 @@ Atualmente, a API oferece o seguinte endpoint:
 
 ## Requisitos
 
-- Linux (ou um ambiente compatível com bash)
+- Linux (ou um ambiente compatível com bash). **estamos trabalhando para facilitar a execução em outros ambientes**  
 - Docker instalado
 
 ## Execução
