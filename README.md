@@ -1,14 +1,14 @@
 # Mais Dividendos
 
-Mais Dividendos é uma aplicação de gerenciamento de carteiras de investimentos, construída com uma arquitetura de microsserviços. O backend fornece dados financeiros de ações, realizando web scraping para capturar o preço atual de uma ação. O frontend exibe essas informações de forma acessível para o usuário final.
+Mais Dividendos é uma aplicação de gerenciamento de carteiras de investimentos de ações, construída com uma arquitetura de microsserviços. 
 
 ## Arquitetura
 
 O projeto segue uma abordagem de microsserviços, onde:
-
-- **update_data_service**: Expondo um endpoint para buscar o preço de ações com base no ticker fornecido, após realizar web scraping online.
+- **postgres**: Container Postgres que persiste os dados na pasta infra/data . 
+- **update_data_service**: Realiza web-scraping online para buscar dados atualizados diariamente do mercado brasileiro de ações. Persiste os dados encontrados no banco de dados Postgres.
 - **frontend_service**: Responsável pela interface gráfica, exibindo os dados das ações e permitindo a interação do usuário.
-- **stock-api-service**: Responsável pelo fornecimento de dados das ações mais atualizados provenientes de um banco de dados Postgres levantado no arquivo infra/compose.yml.
+- **stock-api-service**: Responsável pelo fornecimento de dados das ações provenientes do microsserviço Postgres.
 - **authentication_authorization_service**: EM CONSTRUÇÃO
 
 ### Endpoints Disponíveis
@@ -19,9 +19,9 @@ Atualmente, a API oferece o seguinte endpoint:
 
 ### URLs
 
-- **Frontend**: Acesse a interface de usuário em [http://localhost:3000](http://localhost:3000) ( Não é iniciada automaticamente AINDA)
+- **Frontend**: Acesse a interface de usuário em [http://localhost:3000](http://localhost:3000)
   - Acesse a pasta services/front-end/mais-dividendos-dashboard e digite (em um novo terminal) `npm run install && npm run build && npm run start` 
-- **Stock API**: Acesse o endpoint da API em [http://localhost:8080/api/stock/{ticker}](http://localhost:8080/api/stock/{ticker}) (iniciado automaticamente com a execução do script a seguir)
+- **Stock API**: Acesse o endpoint da API em [http://localhost:8080/api/stock/{ticker}](http://localhost:8080/api/stock/{ticker}) 
     -  você pode usar como exemplo: http://localhost:8080/api/stock/LREN3 ou http://localhost:8080/api/stock/PETR4
 
 ## Requisitos
