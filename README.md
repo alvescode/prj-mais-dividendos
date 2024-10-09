@@ -30,14 +30,19 @@ Atualmente, a API oferece o seguinte endpoint:
 
 ## Execução
 
-Para executar o projeto, siga os seguintes passos:
-
-1. Acesse a pasta `infra` (na pasta /Desenvolvimento/3.Implementação/):
+1. Clone o Repositório em sua máquina local:
     ```bash
-    cd infra
+    git clone https://github.com/alvescode/prj-mais-dividendos
     ```
 
-2. Execute o script bash para iniciar os serviços:
+Para executar o projeto, siga os seguintes passos:
+
+2. Acesse a pasta `infra`:
+    ```bash
+    cd Desenvolvimento/3.Implementação/infra
+    ```
+
+3. Execute o script bash para iniciar os serviços:
     ```bash
     ./execute-service
     ```
