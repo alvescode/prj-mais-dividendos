@@ -31,7 +31,7 @@ Atualmente, a API oferece o seguinte endpoint:
 
 Para executar o projeto, siga os seguintes passos:
 
-1. Acesse a pasta `infra` do projeto:
+1. Acesse a pasta `infra` (na pasta /Desenvolvimento) do projeto:
     ```bash
     cd infra
     ```
