@@ -41,7 +41,7 @@ Para executar o projeto, siga os seguintes passos:
 
 2. Acesse a pasta `infra`:
     ```bash
-    cd Desenvolvimento/3.Implementação/infra
+    cd prj-mais-dividendos/Desenvolvimento/3.Implementação/infra
     ```
 
 3. Execute o script bash para iniciar os serviços:
