@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+
+/*Mais alto em hierarquia*/
+:root {
+    scroll-behavior: smooth;
+    --primary:#318c9c;
+    --second:#b08e6f;
+    --third:#14293b;
+    --bgColor:#e9edf1;
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Open Sans', sans-serif;
+    color: #444;
+    background: var(--bgColor);
+}
+
+a{
+    color: var(--primary);
+    text-decoration: none;
+    cursor: pointer;
+}
+
+a:hover{
+    color: var(--third);
+    text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: 'Nunito', sans-serif;
+}
+
+.dropdwon-menu {
+    border-radius: 4px;
+    padding: 10px 0;
+    -webkit-animation-name: dropdown-animate;
+    animation-name: dropdown-animate;
+    -webkit-animation-duration: 0.2s;
+    animation-duration: 0.2s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    border: 0;
+    box-shadow: 0 5px 30px 0 rgba(82,63,105,0.2);
+}
+
+.dropdwon-menu .dropdown-header, .dropdwon-menu .dropdwon-footer{
+    text-align: center;
+    font-size: 15px;
+    padding: 10px 25px;
+}
+
+.dropdwon-menu .dropdwon-footer a{
+    color: #444;
+    text-decoration: underline;
+}
+
+.dropdwon-menu .dropdwon-footer a:hover{
+    text-decoration: none;
+}
+
+.dropdwon-menu .dropdown-divider{
+    color: var(--primary);
+    margin:0;
+}
+
+.dropdwon-menu .dropdown-item{
+    font-size: 14px;
+    padding: 10px 15px;
+    transition: 0.3s;
+}
+
+.dropdwon-menu .dropdown-item i {
+    margin-right: 10px;
+    font-size: 18px;
+    line-height: 0;
+}
+
+.dropdwon-menu .dropdown-item:hover {
+    background-color: var(--bgColor);
+}
+
+@media (min-width: 768px){
+    .dropdwon-menu-arrow::before{
+        content: '';
+        width: 13px;
+        background: var(--bgColor);
+        position: absolute;
+        top: -7px;
+        right: 20px;
+        transform: rotate(45deg);
+        border-top: 1px solid var(--bgColor);
+        border-left: 1px solid var(--bgColor);
+    }
+}
+
+@-webkit-keyframes dropdown-animate{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+    0%{
+        opacity: 0;
+    }
+}
+
+@keyframes dropdown-animate{
+    0%{
+        opacity: 0;
+    }
+    100%{
+        opacity: 1;
+    }
+
+    0%{
+        opacity: 0;
+    }
+}

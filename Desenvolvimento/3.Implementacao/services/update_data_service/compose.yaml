@@ -1,0 +1,64 @@
+services:
+  node-service:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    networks:
+      - container-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3010/health"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+
+  python-service:
+    build:
+      context: ./python
+      dockerfile: Dockerfile
+    networks:
+      - container-network
+    depends_on:
+      node-service:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    image: postgres:16.3
+    container_name: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: local_user
+      POSTGRES_PASSWORD: local_password
+      POSTGRES_DB: local_db
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - container-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U local_user -d local_db"]
+      interval: 10s
+      retries: 5
+      start_period: 30s
+      timeout: 5s
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    volumes:
+      - ./data/pgadmin:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    networks:
+      - container-network
+
+networks:
+  container-network:
+    driver: bridge

@@ -1,0 +1,12 @@
+#!/bin/bash
+
+mkdir -p data/postgres data/pgadmin
+
+sudo chown -R 5050:5050 ./data/pgadmin ./data/postgres
+
+sudo chmod -R 755 ./data/pgadmin ./data/postgres
+
+docker compose up --remove-orphans --force-recreate --build
+# mvn clean install
+
+# mvn spring-boot:run
