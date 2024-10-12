@@ -1,5 +1,6 @@
-package com.maisdividendos.stock_api;
+package com.maisdividendos.stock_api.controllers;
 
+import com.maisdividendos.stock_api.services.*;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.List;
