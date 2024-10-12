@@ -11,6 +11,9 @@ function Dashboard() {
         throw new Error("Network response was not ok");
       }
       const json = await res.json();
+      if (!json?.prices) {
+        throw new Error("Invalid data format: 'prices' key not found");
+      }
       console.log(json);
       console.log(json["prices"]);
       setPrices(json["prices"]);
