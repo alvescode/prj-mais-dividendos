@@ -1,4 +1,6 @@
-package com.maisdividendos.stock_api;
+package com.maisdividendos.stock_api.controllers;
+
+import com.maisdividendos.stock_api.services.*;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -39,13 +41,5 @@ public class StockController {
         System.out.println(response);
         return ResponseEntity.status(HttpStatusCode.valueOf(200)).body(response);
     }
-    // git checkout refactor/stock-api
-    // -> criar a entity lista de stockprices (ver conversa no gpt)
-    // -> finalizar endpoint /prices
-    // -> apagar pastas e tabelas que ainda nao estao sendo usadas
-    // -> organizar controller/ model/entities/ model/dtos model/services/
-    // model/repository/
-    // git checkout refactor/frontend
-    // -> refatorar o frontend para chamar a api e mainpular dados
-    // intergração com a brapi para pegar a percentagem
+   
 }
