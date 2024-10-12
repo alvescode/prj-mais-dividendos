@@ -1,11 +1,13 @@
-package com.maisdividendos.stock_api;
+package com.maisdividendos.stock_api.services;
 
 import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import com.maisdividendos.stock_api.entities.StockPrice;
+import com.maisdividendos.stock_api.repository.StockRepository;
 
 @Service
 public class StockService {
