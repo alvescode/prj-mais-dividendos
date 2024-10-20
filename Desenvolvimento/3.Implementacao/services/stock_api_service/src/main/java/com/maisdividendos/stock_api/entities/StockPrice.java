@@ -27,5 +27,6 @@ public class StockPrice {
     @Column(name = "last_update")
     private String lastUpdate;
 
+    @Column(unique = true)
     private String ticker;
 }
