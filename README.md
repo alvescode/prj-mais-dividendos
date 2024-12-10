@@ -16,7 +16,9 @@ O projeto segue uma abordagem de microsserviços, onde:
 
 Atualmente, a API oferece o seguinte endpoint:
 
-- `GET /api/stock/{ticker}`: Retorna o preço atual de uma ação de um banco de dados Postgres.
+- `GET /api/stock/{ticker}`: Retorna o preço atual de uma ação específica de acordo com o ticker do banco de dados.
+- `GET /api/stock/prices`: Retorna o preço atual e as informações de uma lista de ações.
+
 
 ### URLs
 
