@@ -62,5 +62,4 @@ Esse script irá configurar todos os microsserviços, incluindo o backend que fa
 
 ## AWS - Diagrama de Arquitetura
 
-![Diagrama AWS](https://frontend-mais-dividendos.s3.us-east-1.amazonaws.com/aws-diagram.jpeg)
 
