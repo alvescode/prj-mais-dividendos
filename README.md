@@ -61,5 +61,6 @@ Esse script irá configurar todos os microsserviços, incluindo o backend que fa
 - O web scraping é feito em tempo real para garantir que o preço exibido seja o mais atualizado possível, entretanto, os dados são persistidos na pasta infra/data/postgres/ criada e mantida como um volume pelo docker, possibilitando que o script de atualização seja executado apenas uma vez.
 
 ## AWS - Diagrama de Arquitetura
+![Diagrama AWS](https://frontend-mais-dividendos.s3.us-east-1.amazonaws.com/aws-diagram.jpeg)
 
 
